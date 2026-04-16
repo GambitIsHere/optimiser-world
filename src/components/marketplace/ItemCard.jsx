@@ -1,0 +1,98 @@
+import { Link } from 'react-router-dom'
+import { Download, MessageSquare, Bot, Zap } from 'lucide-react'
+import VoteWidget from './VoteWidget'
+import TagPill from './TagPill'
+import KarmaBadge from './KarmaBadge'
+import GlassCard from '../ui/GlassCard'
+import useVote from '../../hooks/useVote'
+import { timeAgo, cn, formatNumber } from '../../utils'
+
+export default function ItemCard({ item }) {
+  const { upvotes, downvotes, userVote, handleVote } = useVote(
+    item.upvotes,
+    item.downvotes
+  )
+
+  const typeColor = item.type === 'agent' ? 'violet' : 'mint'
+  const typeIcon = item.type === 'agent' ? Bot : Zap
+  const TypeIcon = typeIcon
+
+  return (
+    <GlassCard hover className="p-4 flex gap-3">
+      {/* Vote widget */}
+      <div className="flex-shrink-0 pt-1">
+        <VoteWidget
+          upvotes={upvotes}
+          downvotes={downvotes}
+          userVote={userVote}
+          onVote={handleVote}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        {/* Top meta row */}
+        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+          <span
+            className={cn(
+              'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium',
+              `bg-${typeColor}/15 text-${typeColor}`
+            )}
+          >
+            <TypeIcon size={12} />
+            {item.type}
+          </span>
+          <span className="text-white/30 text-xs">{item.category}</span>
+          {item.featured && (
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-amber/15 text-amber">
+              Featured
+            </span>
+          )}
+          <span className="text-white/20 text-xs ml-auto">{timeAgo(item.createdAt)}</span>
+        </div>
+
+        {/* Title */}
+        <Link
+          to={`/item/${item.slug}`}
+          className="block text-white font-semibold hover:text-mint transition-colors line-clamp-2 mb-1"
+        >
+          {item.title}
+        </Link>
+
+        {/* Description */}
+        <p className="text-white/50 text-sm line-clamp-3 mb-3">
+          {item.shortDescription}
+        </p>
+
+        {/* Bottom row */}
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex items-center gap-3 text-xs text-white/40">
+            <Link
+              to={`/user/${item.author.username}`}
+              className="flex items-center gap-1.5 hover:text-white/70 transition-colors"
+            >
+              <div className="w-5 h-5 rounded-full bg-surface-2 flex items-center justify-center text-[10px] font-bold text-white/60">
+                {item.author.displayName.charAt(0)}
+              </div>
+              <span>@{item.author.username}</span>
+            </Link>
+            <KarmaBadge karma={item.author.karma} />
+            <span className="flex items-center gap-1">
+              <Download size={12} /> {formatNumber(item.downloads)}
+            </span>
+            <span className="flex items-center gap-1">
+              <MessageSquare size={12} /> {item.comments}
+            </span>
+          </div>
+
+          {/* Tags */}
+          <div className="flex items-center gap-1.5">
+            {item.tags.slice(0, 3).map((tag) => (
+              <TagPill key={tag} label={tag} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </GlassCard>
+  )
+}

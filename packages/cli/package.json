@@ -1,0 +1,26 @@
+{
+  "name": "optimiser-cli",
+  "version": "0.1.0",
+  "description": "Search, install, and manage AI agents and skills from Optimiser.World",
+  "bin": {
+    "optimiser": "./bin/optimiser.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "keywords": [
+    "claude-code",
+    "ai",
+    "agents",
+    "skills",
+    "marketplace",
+    "optimiser"
+  ],
+  "author": "Sanjow Ventures",
+  "license": "MIT"
+}

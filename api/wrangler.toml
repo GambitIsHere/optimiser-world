@@ -1,0 +1,43 @@
+name = "optimiser-world-api"
+main = "src/index.js"
+compatibility_date = "2024-12-01"
+
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[[d1_databases]]
+binding = "DB"
+database_name = "optimiser-db"
+database_id = "placeholder-replace-with-real-id"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "placeholder-replace-with-real-id"
+preview_id = "placeholder-replace-with-real-preview-id"
+
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "optimiser-assets"
+preview_bucket_name = "optimiser-assets-preview"
+
+[ai]
+binding = "AI"
+
+[env.production.d1_databases]
+binding = "DB"
+database_name = "optimiser-db-prod"
+database_id = "placeholder-replace-with-real-prod-id"
+
+[env.production.kv_namespaces]
+binding = "CACHE"
+id = "placeholder-replace-with-real-prod-id"
+
+[env.production.r2_buckets]
+binding = "ASSETS"
+bucket_name = "optimiser-assets-prod"
+
+[triggers]
+crons = ["0 0 * * *"]
