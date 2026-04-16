@@ -6,19 +6,21 @@ import GlassCard from '../components/ui/GlassCard'
 import ItemCard from '../components/marketplace/ItemCard'
 import TagPill from '../components/marketplace/TagPill'
 import KarmaBadge from '../components/marketplace/KarmaBadge'
-import { MOCK_ITEMS, CATEGORIES, TRENDING_TAGS } from '../lib/mockData'
+import { CATEGORIES, TRENDING_TAGS } from '../lib/mockData'
+import { useItems } from '../hooks/useItems'
 import useFeed from '../hooks/useFeed'
 import { cn } from '../utils'
 
 export default function Browse() {
+  const { items: liveItems, loading: itemsLoading, isLive } = useItems()
   const { filteredItems, sortBy, setSortBy, category, setCategory, type, setType } =
-    useFeed(MOCK_ITEMS)
+    useFeed(liveItems)
   const [showFilters, setShowFilters] = useState(false)
 
   // Get unique authors sorted by karma for "Top Contributors"
   const topContributors = useMemo(() => {
     const authorMap = {}
-    MOCK_ITEMS.forEach((item) => {
+    liveItems.forEach((item) => {
       if (!authorMap[item.author.username]) {
         authorMap[item.author.username] = item.author
       }
@@ -26,10 +28,10 @@ export default function Browse() {
     return Object.values(authorMap)
       .sort((a, b) => b.karma - a.karma)
       .slice(0, 5)
-  }, [])
+  }, [liveItems])
 
   // Get editor's picks (3 featured items)
-  const editorsPicks = MOCK_ITEMS.filter((item) => item.featured)
+  const editorsPicks = liveItems.filter((item) => item.featured)
     .sort((a, b) => (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes))
     .slice(0, 3)
 

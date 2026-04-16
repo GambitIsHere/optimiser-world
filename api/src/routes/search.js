@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { reciprocalRankFusion, applyBoosts, sanitizeFtsQuery, buildSearchFilters } from '../lib/rrf.js'
 import { optionalAuth, getUser } from '../lib/auth.js'
+import { observeSearch } from '../learning/index.js'
 
 const app = new Hono()
 
@@ -215,6 +216,11 @@ app.post('/search', optionalAuth(), async (c) => {
         _sourcesFound: item.sourcesFound
       })
     }))
+
+    // Record search observation (non-blocking)
+    c.executionCtx.waitUntil(
+      observeSearch(c.env.DB, c.env.CACHE, normalizedQuery, total, { category, type })
+    )
 
     return c.json({
       success: true,

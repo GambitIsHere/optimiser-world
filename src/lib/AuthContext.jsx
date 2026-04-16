@@ -1,6 +1,8 @@
-import React, { createContext, useContext, useState, useCallback } from 'react'
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
 
 const AuthContext = createContext(null)
+
+const STORAGE_KEY = 'optimiser_auth'
 
 const MOCK_USER = {
   id: 'u_1',
@@ -14,11 +16,38 @@ const MOCK_USER = {
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY)
+      return stored ? JSON.parse(stored) : null
+    } catch {
+      return null
+    }
+  })
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    try {
+      return !!localStorage.getItem(STORAGE_KEY)
+    } catch {
+      return false
+    }
+  })
 
-  const login = useCallback(() => {
-    setUser(MOCK_USER)
+  // Sync to localStorage on change
+  useEffect(() => {
+    try {
+      if (user) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(user))
+      } else {
+        localStorage.removeItem(STORAGE_KEY)
+      }
+    } catch {
+      // Storage unavailable
+    }
+  }, [user])
+
+  const login = useCallback((userData) => {
+    const u = userData || MOCK_USER
+    setUser(u)
     setIsAuthenticated(true)
   }, [])
 

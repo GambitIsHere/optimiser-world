@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { MOCK_ITEMS } from '../../lib/mockData'
+import { useItems } from '../../hooks/useItems'
 import { sortItems } from '../../lib/hotAlgorithm'
 import GlassCard from '../ui/GlassCard'
 import VoteWidget from '../marketplace/VoteWidget'
@@ -8,7 +8,7 @@ import useVote from '../../hooks/useVote'
 import { Bot, Zap } from 'lucide-react'
 
 function FeaturedCard({ item }) {
-  const { upvotes, downvotes, userVote, handleVote } = useVote(item.upvotes, item.downvotes)
+  const { upvotes, downvotes, userVote, handleVote } = useVote(item.upvotes, item.downvotes, item.slug)
   const TypeIcon = item.type === 'agent' ? Bot : Zap
   const typeColor = item.type === 'agent' ? 'text-violet' : 'text-mint'
 
@@ -32,7 +32,8 @@ function FeaturedCard({ item }) {
 }
 
 export default function FeaturedCards() {
-  const featured = sortItems(MOCK_ITEMS, 'hot').slice(0, 3)
+  const { items } = useItems({ sort: 'hot', limit: 6 })
+  const featured = sortItems(items, 'hot').slice(0, 3)
 
   return (
     <section className="max-w-6xl mx-auto px-6">

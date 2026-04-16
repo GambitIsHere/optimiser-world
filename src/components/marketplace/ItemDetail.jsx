@@ -280,8 +280,9 @@ await instance.initialize()`}</code>
 
             <div className="flex-shrink-0">
               <VoteWidget
-                votes={item.votes}
-                isVoted={false}
+                upvotes={item.votes || 0}
+                downvotes={0}
+                userVote={null}
                 onVote={() => {}}
                 variant="large"
               />

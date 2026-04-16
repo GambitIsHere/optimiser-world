@@ -9,7 +9,8 @@
     "db:migrate": "wrangler d1 execute optimiser-db --local --file=./src/db/schema.sql"
   },
   "dependencies": {
-    "hono": "^4.0.0"
+    "hono": "^4.0.0",
+    "@mendable/firecrawl-js": "^1.0.0"
   },
   "devDependencies": {
     "wrangler": "^3.0.0"

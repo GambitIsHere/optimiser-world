@@ -28,7 +28,7 @@ export default function IssueCard({ issue, onClick, delay = 0 }) {
         <div className="flex items-center gap-1.5">
           <TrendingDown className="w-3.5 h-3.5 text-red" />
           <span className="text-sm font-mono font-bold text-red">€{issue.estimatedImpact.toLocaleString()}</span>
-          <span className="text-xs text-white/25">/{issue.impactUnit?.replace('EUR/', '') || 'mo'}</span>
+          <span className="text-xs text-white/25">/{issue.impactUnit?.replace('EUR/', '').replace('/month', 'mo').replace('month', 'mo') || 'mo'}</span>
         </div>
         <span className="text-xs text-white/20">{issue.flow}</span>
       </div>

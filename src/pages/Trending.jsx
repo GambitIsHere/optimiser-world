@@ -1,10 +1,12 @@
-import { MOCK_ITEMS, CATEGORIES, TRENDING_TAGS } from '../lib/mockData'
+import { useItems, CATEGORIES, TRENDING_TAGS } from '../hooks/useItems'
 import GlassCard from '../components/ui/GlassCard'
 import CategoryIcon from '../components/ui/CategoryIcon'
 import TagPill from '../components/marketplace/TagPill'
 import { cn, formatNumber, timeAgo } from '../utils'
 
 export default function Trending() {
+  const { items: allItems } = useItems({ sort: 'hot', limit: 50 })
+
   // Calculate hot score for items
   const calculateHotScore = (item) => {
     const age = Date.now() - new Date(item.updatedAt).getTime()
@@ -15,7 +17,7 @@ export default function Trending() {
 
   // Group items by category and get top 3 by hot score
   const getTopItemsByCategory = (categoryId) => {
-    return MOCK_ITEMS.filter((item) => item.category === categoryId)
+    return allItems.filter((item) => item.category === categoryId)
       .sort((a, b) => calculateHotScore(b) - calculateHotScore(a))
       .slice(0, 3)
   }

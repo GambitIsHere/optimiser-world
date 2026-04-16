@@ -1,62 +1,22 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Search as SearchIcon, Filter } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import GlassCard from '../components/ui/GlassCard'
 import SortToggle from '../components/ui/SortToggle'
 import CategoryIcon from '../components/ui/CategoryIcon'
-import { MOCK_ITEMS, CATEGORIES } from '../lib/mockData'
+import { CATEGORIES } from '../lib/mockData'
+import { useHybridSearch } from '../hooks/useItems'
 import { cn, formatNumber, timeAgo } from '../utils'
 
 export default function Search() {
-  const [query, setQuery] = useState('')
-  const [isSearching, setIsSearching] = useState(false)
-  const [results, setResults] = useState([])
+  const { query, results, loading: isSearching, isLive, search } = useHybridSearch(300)
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [typeFilter, setTypeFilter] = useState('all')
   const [sortBy, setSortBy] = useState('hot')
-  const searchTimeout = useRef(null)
 
-  // Debounced search
-  useEffect(() => {
-    if (searchTimeout.current) clearTimeout(searchTimeout.current)
-
-    if (query.trim()) {
-      setIsSearching(true)
-      searchTimeout.current = setTimeout(() => {
-        const filtered = MOCK_ITEMS.filter((item) => {
-          const matchesQuery =
-            item.title.toLowerCase().includes(query.toLowerCase()) ||
-            item.description.toLowerCase().includes(query.toLowerCase()) ||
-            item.tags.some((tag) =>
-              tag.toLowerCase().includes(query.toLowerCase())
-            )
-          const matchesCategory =
-            selectedCategory === 'all' || item.category === selectedCategory
-          const matchesType = typeFilter === 'all' || item.type === typeFilter
-
-          return matchesQuery && matchesCategory && matchesType
-        })
-
-        // Sort results
-        let sorted = [...filtered]
-        if (sortBy === 'hot') {
-          sorted.sort((a, b) => b.upvotes - a.upvotes)
-        } else if (sortBy === 'new') {
-          sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        } else if (sortBy === 'trending') {
-          sorted.sort((a, b) => b.rating - a.rating)
-        }
-
-        setResults(sorted)
-        setIsSearching(false)
-      }, 300)
-    } else {
-      setResults([])
-      setIsSearching(false)
-    }
-
-    return () => clearTimeout(searchTimeout.current)
-  }, [query, selectedCategory, typeFilter, sortBy])
+  const handleQueryChange = (e) => {
+    search(e.target.value, { category: selectedCategory, type: typeFilter, sort: sortBy })
+  }
 
   return (
     <div className="min-h-screen bg-bg">
@@ -73,7 +33,7 @@ export default function Search() {
               type="text"
               placeholder="Search agents, skills, tags..."
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={handleQueryChange}
               className="w-full pl-12 pr-4 py-3 bg-surface/60 border border-white/[0.06] rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/20 focus:bg-surface/80 transition-all"
             />
           </div>

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS items (
   type TEXT NOT NULL CHECK(type IN ('agent', 'skill')),
   category TEXT NOT NULL,
   tags TEXT DEFAULT '[]',
-  author_id TEXT NOT NULL,
+  author_id TEXT,
   upvotes INTEGER DEFAULT 0,
   downvotes INTEGER DEFAULT 0,
   rating_sum REAL DEFAULT 0,
@@ -44,6 +44,15 @@ CREATE TABLE IF NOT EXISTS items (
   icon_url TEXT,
   repo_url TEXT,
   demo_url TEXT,
+  github_owner TEXT,
+  github_repo TEXT,
+  github_url TEXT,
+  github_stars INTEGER DEFAULT 0,
+  github_forks INTEGER DEFAULT 0,
+  quality_score INTEGER DEFAULT 0,
+  tutorials TEXT,        -- JSON array of {title, url, snippet}
+  related_repos TEXT,    -- JSON array of github owner/repo strings
+  scraped_at DATETIME,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
@@ -231,3 +240,55 @@ WHEN old.updated_at = NEW.updated_at
 BEGIN
   UPDATE users SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
 END;
+
+-- Scraper runs logging table
+CREATE TABLE IF NOT EXISTS scraper_runs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  started_at TEXT NOT NULL,
+  finished_at TEXT,
+  queries_run INTEGER DEFAULT 0,
+  repos_found INTEGER DEFAULT 0,
+  validated INTEGER DEFAULT 0,
+  rejected INTEGER DEFAULT 0,
+  ingested INTEGER DEFAULT 0,
+  updated INTEGER DEFAULT 0,
+  errors INTEGER DEFAULT 0,
+  duration_ms INTEGER
+);
+
+CREATE INDEX IF NOT EXISTS idx_scraper_runs_started_at ON scraper_runs(started_at DESC);
+
+-- Discovery sources tracking table
+CREATE TABLE IF NOT EXISTS discovery_sources (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  item_id TEXT NOT NULL,
+  source_type TEXT NOT NULL,  -- 'firecrawl_search', 'github_search', 'awesome_list', 'manual'
+  source_query TEXT,
+  source_url TEXT,
+  discovered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_discovery_item ON discovery_sources(item_id);
+CREATE INDEX IF NOT EXISTS idx_discovery_source_type ON discovery_sources(source_type);
+
+-- Learning system tables (inspired by claude-mem's observation → summary pattern)
+
+CREATE TABLE IF NOT EXISTS observations (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  type TEXT NOT NULL,          -- 'search', 'search_miss', 'vote', 'install', 'usage_report', 'page_view'
+  data TEXT NOT NULL,          -- JSON payload
+  user_id TEXT,                -- nullable, for anonymous events
+  processed INTEGER DEFAULT 0, -- 0 = pending, 1 = compressed into insight
+  created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_obs_type_processed ON observations(type, processed);
+CREATE INDEX IF NOT EXISTS idx_obs_created ON observations(created_at);
+
+CREATE TABLE IF NOT EXISTS insights (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  type TEXT NOT NULL,          -- 'trending_queries', 'unmet_demand', 'vote_momentum', 'reliability_scores', 'category_trends'
+  data TEXT NOT NULL,          -- JSON compressed insight
+  created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_insights_type ON insights(type, created_at);

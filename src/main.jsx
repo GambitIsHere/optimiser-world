@@ -27,6 +27,7 @@ const Heal = lazy(() => import('./pages/Heal'))
 const About = lazy(() => import('./pages/About'))
 const Login = lazy(() => import('./pages/Login'))
 const Pricing = lazy(() => import('./pages/Pricing'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function PageLoader() {
   return (
@@ -65,6 +66,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Suspense>

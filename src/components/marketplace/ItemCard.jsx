@@ -10,7 +10,8 @@ import { timeAgo, cn, formatNumber } from '../../utils'
 export default function ItemCard({ item }) {
   const { upvotes, downvotes, userVote, handleVote } = useVote(
     item.upvotes,
-    item.downvotes
+    item.downvotes,
+    item.slug
   )
 
   const typeColor = item.type === 'agent' ? 'violet' : 'mint'

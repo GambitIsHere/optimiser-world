@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { requireAuth, optionalAuth, getUser } from '../lib/auth.js'
+import { observeVote } from '../learning/index.js'
 
 const app = new Hono()
 
@@ -179,6 +180,13 @@ app.post('/items/:slug/vote', requireAuth(), async (c) => {
       counts?.downvotes || 0,
       item.id
     ).run()
+
+    // Record vote observation (non-blocking) - only for created/switched (not removed)
+    if (action !== 'removed') {
+      c.executionCtx.waitUntil(
+        observeVote(c.env.DB, slug, direction, user.id)
+      )
+    }
 
     return c.json({
       success: true,

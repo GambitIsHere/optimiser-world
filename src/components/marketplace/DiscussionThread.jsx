@@ -2,12 +2,18 @@ import { useState } from 'react'
 import { MessageSquare } from 'lucide-react'
 import VoteWidget from './VoteWidget'
 import KarmaBadge from './KarmaBadge'
-import useVote from '../../hooks/useVote'
 import { timeAgo, cn } from '../../utils'
 
 export default function DiscussionThread({ comments = [], itemSlug }) {
   const [newComment, setNewComment] = useState('')
-  const { votes, toggleVote } = useVote('comments')
+  const [commentVotes, setCommentVotes] = useState({})
+
+  const handleCommentVote = (commentId, direction) => {
+    setCommentVotes(prev => ({
+      ...prev,
+      [commentId]: prev[commentId] === direction ? null : direction
+    }))
+  }
 
   const topLevelComments = comments.filter(c => c.parentId === null)
 
@@ -53,7 +59,7 @@ export default function DiscussionThread({ comments = [], itemSlug }) {
           topLevelComments.map((comment) => {
             const replies = getReplies(comment.id)
             const authorInitial = comment.author.username.charAt(0).toUpperCase()
-            const isVoted = votes[comment.id]
+            const userVoteDir = commentVotes[comment.id] || null
 
             return (
               <div key={comment.id} className="space-y-3">
@@ -82,10 +88,11 @@ export default function DiscussionThread({ comments = [], itemSlug }) {
 
                       <div className="flex items-center gap-4">
                         <VoteWidget
-                          votes={comment.upvotes}
-                          isVoted={isVoted}
-                          onVote={() => toggleVote(comment.id)}
-                          variant="compact"
+                          upvotes={comment.upvotes || 0}
+                          downvotes={comment.downvotes || 0}
+                          userVote={userVoteDir}
+                          onVote={(dir) => handleCommentVote(comment.id, dir)}
+                          variant="horizontal"
                         />
                         <button className="text-xs font-medium text-white/60 hover:text-mint transition">
                           Reply
@@ -99,7 +106,7 @@ export default function DiscussionThread({ comments = [], itemSlug }) {
                   <div className="space-y-3 border-l-2 border-white/10 ml-8 pl-4">
                     {replies.map((reply) => {
                       const replyAuthorInitial = reply.author.username.charAt(0).toUpperCase()
-                      const isReplyVoted = votes[reply.id]
+                      const replyVoteDir = commentVotes[reply.id] || null
 
                       return (
                         <div
@@ -130,10 +137,11 @@ export default function DiscussionThread({ comments = [], itemSlug }) {
 
                               <div className="flex items-center gap-4">
                                 <VoteWidget
-                                  votes={reply.upvotes}
-                                  isVoted={isReplyVoted}
-                                  onVote={() => toggleVote(reply.id)}
-                                  variant="compact"
+                                  upvotes={reply.upvotes || 0}
+                                  downvotes={reply.downvotes || 0}
+                                  userVote={replyVoteDir}
+                                  onVote={(dir) => handleCommentVote(reply.id, dir)}
+                                  variant="horizontal"
                                 />
                               </div>
                             </div>

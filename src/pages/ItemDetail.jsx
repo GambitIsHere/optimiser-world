@@ -1,10 +1,22 @@
 import { useParams, Link } from 'react-router-dom'
-import { MOCK_ITEMS, MOCK_COMMENTS } from '../lib/mockData'
+import { useItem } from '../hooks/useItems'
+import { MOCK_COMMENTS } from '../lib/mockData'
 import ItemDetailView from '../components/marketplace/ItemDetail'
 
 export default function ItemDetailPage() {
   const { id } = useParams()
-  const item = MOCK_ITEMS.find(i => i.slug === id || i.id === id)
+  const { item, loading } = useItem(id)
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-mint/30 border-t-mint rounded-full animate-spin" />
+          <span className="text-white/40 text-sm">Loading...</span>
+        </div>
+      </div>
+    )
+  }
 
   if (!item) {
     return (

@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { optionalAuth, getUser } from '../lib/auth.js'
+import { observeUsageReport } from '../learning/index.js'
 
 const app = new Hono()
 
@@ -93,6 +94,11 @@ app.post('/report', optionalAuth(), async (c) => {
 
     // Fire and forget
     updateQuality()
+
+    // Record usage report observation (non-blocking)
+    c.executionCtx.waitUntil(
+      observeUsageReport(c.env.DB, item_slug, outcome, duration_ms, user?.id)
+    )
 
     return c.json({
       success: true,
