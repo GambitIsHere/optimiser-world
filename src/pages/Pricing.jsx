@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowLeft, Check, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Check, X } from 'lucide-react'
 import PricingCards from '../components/landing/PricingCards'
 import Footer from '../components/landing/Footer'
 
@@ -26,14 +25,7 @@ function CellValue({ value }) {
 
 export default function Pricing() {
   return (
-    <div className="min-h-screen bg-bg">
-      <div className="max-w-6xl mx-auto px-6 pt-8">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-white/30 hover:text-white transition-colors mb-8 cursor-pointer">
-          <ArrowLeft className="w-4 h-4" />
-          Back to home
-        </Link>
-      </div>
-
+    <div className="min-h-screen bg-bg pt-20">
       <PricingCards />
 
       <section className="py-16 px-6">

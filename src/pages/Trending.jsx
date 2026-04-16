@@ -1,3 +1,4 @@
+import SEO from '../components/ui/SEO'
 import { useItems, CATEGORIES, TRENDING_TAGS } from '../hooks/useItems'
 import GlassCard from '../components/ui/GlassCard'
 import CategoryIcon from '../components/ui/CategoryIcon'
@@ -35,6 +36,7 @@ export default function Trending() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <SEO title="Trending" description="The hottest AI agents and skills, updated hourly." path="/trending" />
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="mb-12">

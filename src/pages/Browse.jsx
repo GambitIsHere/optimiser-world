@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { X } from 'lucide-react'
+import SEO from '../components/ui/SEO'
 import SortToggle from '../components/ui/SortToggle'
 import GlassCard from '../components/ui/GlassCard'
 import ItemCard from '../components/marketplace/ItemCard'
@@ -45,6 +46,7 @@ export default function Browse() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <SEO title="Marketplace" description="Browse AI agents and skills. Discover automation tools built by the community." path="/browse" />
       {/* Header */}
       <div className="bg-surface/30 backdrop-blur-xl border-b border-white/[0.06] sticky top-0 z-40 py-6">
         <div className="max-w-7xl mx-auto px-6">

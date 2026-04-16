@@ -5,7 +5,8 @@ import SortToggle from '../components/ui/SortToggle'
 import GlassCard from '../components/ui/GlassCard'
 import CategoryIcon from '../components/ui/CategoryIcon'
 import ItemCard from '../components/marketplace/ItemCard'
-import { MOCK_ITEMS, CATEGORIES } from '../lib/mockData'
+import { CATEGORIES } from '../lib/mockData'
+import { useItems } from '../hooks/useItems'
 import useFeed from '../hooks/useFeed'
 
 export default function Category() {
@@ -17,12 +18,10 @@ export default function Category() {
     [slug]
   )
 
-  // Filter items by category
-  const categoryItems = useMemo(
-    () =>
-      categoryData ? MOCK_ITEMS.filter((item) => item.category === categoryData.id) : [],
-    [categoryData]
-  )
+  // Fetch items for this category from API (falls back to mock)
+  const { items: categoryItems } = useItems({
+    category: categoryData?.id || 'all',
+  })
 
   // Use the feed hook to handle sorting/filtering
   const { filteredItems, sortBy, setSortBy } = useFeed(categoryItems)

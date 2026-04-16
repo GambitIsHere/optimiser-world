@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Search as SearchIcon, Filter } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/ui/SEO'
 import GlassCard from '../components/ui/GlassCard'
 import SortToggle from '../components/ui/SortToggle'
 import CategoryIcon from '../components/ui/CategoryIcon'
@@ -20,6 +21,7 @@ export default function Search() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <SEO title="Search" description="Search for AI agents and skills across the marketplace." path="/search" />
       {/* Search Header */}
       <div className="bg-surface/30 backdrop-blur-xl border-b border-white/[0.06] sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-6 py-8">

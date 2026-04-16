@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { ExternalLink, Mail, Calendar } from 'lucide-react'
+import { ExternalLink, Calendar } from 'lucide-react'
 import GlassCard from '../components/ui/GlassCard'
 import KarmaBadge from '../components/marketplace/KarmaBadge'
 import TabNav from '../components/ui/TabNav'
 import { MOCK_ITEMS, MOCK_COMMENTS } from '../lib/mockData'
+import { api } from '../api/client'
 import { cn, formatNumber, timeAgo, getKarmaTier } from '../utils'
 
 const MOCK_USER = {
@@ -20,9 +21,25 @@ const MOCK_USER = {
 export default function Profile() {
   const { username } = useParams()
   const [activeTab, setActiveTab] = useState('submissions')
+  const [user, setUser] = useState(MOCK_USER)
+  const [loading, setLoading] = useState(true)
 
-  // In a real app, fetch user from API based on username
-  const user = MOCK_USER
+  // Try fetching user from API, fall back to mock
+  useEffect(() => {
+    let cancelled = false
+    async function loadProfile() {
+      try {
+        const data = await api.getProfile()
+        if (!cancelled && data) setUser(data)
+      } catch {
+        // keep mock
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    loadProfile()
+    return () => { cancelled = true }
+  }, [username])
 
   const userSubmissions = MOCK_ITEMS.filter(
     (item) => item.author.username === user.username

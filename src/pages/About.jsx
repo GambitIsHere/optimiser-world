@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowLeft, TrendingUp, Brain, RefreshCw } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { TrendingUp, Brain, RefreshCw } from 'lucide-react'
 import Footer from '../components/landing/Footer'
 
 const pillars = [
@@ -17,11 +16,7 @@ const team = [
 export default function About() {
   return (
     <div className="min-h-screen bg-bg">
-      <div className="max-w-4xl mx-auto px-6 py-24">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-white/30 hover:text-white transition-colors mb-12 cursor-pointer">
-          <ArrowLeft className="w-4 h-4" />
-          Back to home
-        </Link>
+      <div className="max-w-4xl mx-auto px-6 pt-28 pb-16">
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">

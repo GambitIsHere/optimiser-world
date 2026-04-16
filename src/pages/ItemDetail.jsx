@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useItem } from '../hooks/useItems'
 import { MOCK_COMMENTS } from '../lib/mockData'
+import SEO from '../components/ui/SEO'
 import ItemDetailView from '../components/marketplace/ItemDetail'
 
 export default function ItemDetailPage() {
@@ -30,5 +31,15 @@ export default function ItemDetailPage() {
 
   const comments = MOCK_COMMENTS.filter(c => c.itemSlug === item.slug)
 
-  return <ItemDetailView item={item} comments={comments} />
+  return (
+    <>
+      <SEO
+        title={item.title}
+        description={item.shortDescription || item.description}
+        path={`/item/${item.slug}`}
+        type="article"
+      />
+      <ItemDetailView item={item} comments={comments} />
+    </>
+  )
 }

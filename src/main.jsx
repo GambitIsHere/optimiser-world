@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import { AuthProvider } from './lib/AuthContext'
+import { HelmetProvider } from 'react-helmet-async'
 import Layout from './components/ui/Layout'
+import ErrorBoundary from './components/ui/ErrorBoundary'
 
 // Eagerly load the landing page (first paint)
 import Home from './pages/Home'
@@ -42,10 +44,12 @@ function PageLoader() {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <AuthProvider>
+          <BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
@@ -68,9 +72,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="/pricing" element={<Pricing />} />
               <Route path="*" element={<NotFound />} />
             </Route>
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </AuthProvider>
+            </Routes>
+          </Suspense>
+          </BrowserRouter>
+        </AuthProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 )

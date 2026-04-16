@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../../lib/AuthContext'
 import MagneticButton from './MagneticButton'
+import Navbar from '../landing/Navbar'
 import { cn } from '../../utils'
 
 // Pages that should render WITHOUT the sidebar (full-width marketing)
@@ -49,13 +50,23 @@ export default function Layout() {
 
   // Full-width layout for marketing pages
   if (isFullWidth) {
-    return <Outlet />
+    return (
+      <>
+        <Navbar />
+        <Outlet />
+      </>
+    )
   }
 
   return (
     <div className="flex h-screen bg-bg">
+      {/* Skip to content link */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-mint focus:text-bg focus:rounded-lg focus:font-medium">
+        Skip to content
+      </a>
+
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col fixed left-0 top-0 h-screen w-60 bg-surface-3 border-r border-white/[0.06] p-6 overflow-y-auto">
+      <aside className="hidden md:flex flex-col fixed left-0 top-0 h-screen w-60 bg-surface-3 border-r border-white/[0.06] p-6 overflow-y-auto" role="navigation" aria-label="Main navigation">
         {/* Logo */}
         <NavLink to="/" className="mb-8 block">
           <h1 className="text-2xl font-bold text-white">
@@ -166,12 +177,14 @@ export default function Layout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-60 overflow-auto">
-        <Outlet />
+      <main id="main-content" className="flex-1 md:ml-60 overflow-auto pb-20 md:pb-0" role="main">
+        <div className="p-6 md:p-8 max-w-7xl">
+          <Outlet />
+        </div>
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="fixed md:hidden bottom-0 left-0 right-0 bg-surface-3/90 backdrop-blur-xl border-t border-white/[0.06] px-4 py-2 flex justify-around z-50">
+      <nav className="fixed md:hidden bottom-0 left-0 right-0 bg-surface-3/90 backdrop-blur-xl border-t border-white/[0.06] px-4 py-2 flex justify-around z-50" aria-label="Mobile navigation">
         {[
           ...marketplaceNav.slice(0, 3),
           ...(isAuthenticated ? [{ id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' }] : []),
@@ -182,6 +195,7 @@ export default function Layout() {
             <NavLink
               key={item.id}
               to={item.path}
+              aria-label={item.label}
               className={({ isActive }) =>
                 cn(
                   'flex items-center justify-center p-3 rounded-lg transition-colors duration-200',
@@ -189,7 +203,7 @@ export default function Layout() {
                 )
               }
             >
-              <Icon size={22} />
+              <Icon size={22} aria-hidden="true" />
             </NavLink>
           )
         })}
