@@ -5,14 +5,14 @@ import SEO from '../components/ui/SEO'
 import ItemDetailView from '../components/marketplace/ItemDetail'
 
 export default function ItemDetailPage() {
-  const { id } = useParams()
-  const { item, loading } = useItem(id)
+  const { slug } = useParams()
+  const { item, loading } = useItem(slug)
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-mint/30 border-t-mint rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-[#D0D1C9] border-t-[#F54E00] rounded-full animate-spin" />
           <span className="text-[#6B6E66] text-sm">Loading...</span>
         </div>
       </div>

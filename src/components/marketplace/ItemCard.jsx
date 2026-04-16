@@ -14,7 +14,9 @@ export default function ItemCard({ item }) {
     item.slug
   )
 
-  const typeColor = item.type === 'agent' ? 'violet' : 'mint'
+  const typeColorClasses = item.type === 'agent'
+    ? 'bg-[#1D4AFF]/15 text-[#1D4AFF]'
+    : 'bg-[#7DD3C0]/15 text-[#7DD3C0]'
   const typeIcon = item.type === 'agent' ? Bot : Zap
   const TypeIcon = typeIcon
 
@@ -37,7 +39,7 @@ export default function ItemCard({ item }) {
           <span
             className={cn(
               'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium',
-              `bg-${typeColor}/15 text-${typeColor}`
+              typeColorClasses
             )}
           >
             <TypeIcon size={12} />
@@ -45,7 +47,7 @@ export default function ItemCard({ item }) {
           </span>
           <span className="text-[#6B6E66] text-xs">{item.category}</span>
           {item.featured && (
-            <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-amber/15 text-amber">
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-[#F7B200]/15 text-[#F7B200]">
               Featured
             </span>
           )}
@@ -69,7 +71,7 @@ export default function ItemCard({ item }) {
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-3 text-xs text-[#6B6E66]">
             <Link
-              to={`/user/${item.author.username}`}
+              to={`/u/${item.author.username}`}
               className="flex items-center gap-1.5 hover:text-[#2E2E2E] transition-colors"
             >
               <div className="w-5 h-5 rounded-full bg-[#E3E4DD] flex items-center justify-center text-[10px] font-bold text-[#6B6E66]">

@@ -43,7 +43,7 @@ export default function useFeed(items = []) {
         (item) =>
           item.title?.toLowerCase().includes(query) ||
           item.description?.toLowerCase().includes(query) ||
-          item.author?.toLowerCase().includes(query) ||
+          item.author?.username?.toLowerCase().includes(query) ||
           item.tags?.some((tag) => tag.toLowerCase().includes(query))
       )
     }

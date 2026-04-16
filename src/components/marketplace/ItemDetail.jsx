@@ -43,9 +43,9 @@ export default function ItemDetail({ item, comments = [] }) {
       className={cn(
         'w-5 h-5',
         i < Math.floor(item.rating)
-          ? 'bg-amber text-amber'
+          ? 'bg-[#F7B200] text-[#F7B200]'
           : i < item.rating
-            ? 'bg-amber/50 text-amber'
+            ? 'bg-[#F7B200]/50 text-[#F7B200]'
             : 'bg-[#E3E4DD] text-[#6B6E66]'
       )}
     >
@@ -83,7 +83,7 @@ export default function ItemDetail({ item, comments = [] }) {
           </div>
           <div className="bg-[#E3E4DD] rounded-lg p-3">
             <p className="text-[#6B6E66] mb-1">Last Updated</p>
-            <p className="text-[#151515] font-medium">{item.lastUpdated}</p>
+            <p className="text-[#151515] font-medium">{item.updatedAt}</p>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export default function ItemDetail({ item, comments = [] }) {
         <div className="flex items-center gap-4">
           <div className="flex gap-1">{ratingStars}</div>
           <div className="text-[#151515]">
-            {item.rating.toFixed(1)} / 5 ({formatNumber(item.reviews)} reviews)
+            {item.rating.toFixed(1)} / 5 ({formatNumber(item.ratingCount)} reviews)
           </div>
         </div>
       </div>
@@ -102,13 +102,13 @@ export default function ItemDetail({ item, comments = [] }) {
     <div className="prose max-w-none space-y-6">
       <h2 className="text-2xl font-bold text-[#151515]">Getting Started</h2>
       <p className="text-[#2E2E2E]">
-        This is a comprehensive guide to using {item.name}. Follow the sections below to integrate
+        This is a comprehensive guide to using {item.title}. Follow the sections below to integrate
         and configure the solution.
       </p>
 
       <h3 className="text-xl font-semibold text-[#151515]">Installation</h3>
       <p className="text-[#2E2E2E]">Run the following command to install:</p>
-      <pre className="bg-[#E3E4DD] border border-border rounded-lg p-4 overflow-x-auto">
+      <pre className="bg-[#E3E4DD] border border-[#D0D1C9] rounded-lg p-4 overflow-x-auto">
         <code className="text-[#F54E00] text-sm font-mono">{item.installCommand}</code>
       </pre>
 
@@ -130,7 +130,7 @@ export default function ItemDetail({ item, comments = [] }) {
     <div className="space-y-6">
       <div>
         <h3 className="text-lg font-semibold text-[#151515] mb-4">Install Command</h3>
-        <div className="bg-[#E3E4DD] border border-border rounded-lg p-4">
+        <div className="bg-[#E3E4DD] border border-[#D0D1C9] rounded-lg p-4">
           <pre className="text-[#F54E00] text-sm font-mono overflow-x-auto">
             <code>{item.installCommand}</code>
           </pre>
@@ -139,12 +139,12 @@ export default function ItemDetail({ item, comments = [] }) {
 
       <div>
         <h3 className="text-lg font-semibold text-[#151515] mb-4">Integration Example</h3>
-        <div className="bg-[#E3E4DD] border border-border rounded-lg p-4">
+        <div className="bg-[#E3E4DD] border border-[#D0D1C9] rounded-lg p-4">
           <pre className="text-[#F54E00] text-sm font-mono overflow-x-auto whitespace-pre-wrap">
             <code>{`// Basic integration example
-import { ${item.name.replace(/[- ]/g, '')} } from '${item.installCommand.split("'")[1]}'
+import { ${item.title.replace(/[- ]/g, '')} } from '${item.installCommand.split("'")[1]}'
 
-const instance = new ${item.name.replace(/[- ]/g, '')}({
+const instance = new ${item.title.replace(/[- ]/g, '')}({
   apiKey: process.env.API_KEY,
   config: {
     // your configuration
@@ -197,7 +197,7 @@ await instance.initialize()`}</code>
             changes: ['Major refactor of API', 'Breaking changes to configuration', 'New features and improvements'],
           },
         ].map((entry) => (
-          <div key={entry.version} className="bg-[#E3E4DD] border border-border rounded-lg p-4">
+          <div key={entry.version} className="bg-[#E3E4DD] border border-[#D0D1C9] rounded-lg p-4">
             <div className="flex items-start justify-between mb-3">
               <div>
                 <h4 className="font-semibold text-[#151515]">v{entry.version}</h4>
@@ -243,19 +243,19 @@ await instance.initialize()`}</code>
                   className={cn(
                     'inline-block px-3 py-1 rounded-full text-xs font-semibold',
                     item.type === 'agent'
-                      ? 'bg-violet/20 text-violet'
+                      ? 'bg-[#C79EF5]/20 text-[#C79EF5]'
                       : 'bg-[#FEE8DE] text-[#F54E00]'
                   )}
                 >
                   {item.type.toUpperCase()}
                 </span>
                 {item.featured && (
-                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-amber/20 text-amber">
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#F7B200]/20 text-[#F7B200]">
                     FEATURED
                   </span>
                 )}
               </div>
-              <h1 className="text-3xl font-bold text-[#151515]">{item.name}</h1>
+              <h1 className="text-3xl font-bold text-[#151515]">{item.title}</h1>
 
               <div className="flex items-center gap-4 pt-2">
                 <div className="flex items-center gap-3">
@@ -265,7 +265,7 @@ await instance.initialize()`}</code>
                   <div>
                     <p className="text-sm">
                       <Link
-                        to={`/profile/${item.author.username}`}
+                        to={`/u/${item.author.username}`}
                         className="font-medium text-[#151515] hover:text-[#F54E00] transition"
                       >
                         {item.author.displayName}
@@ -280,7 +280,7 @@ await instance.initialize()`}</code>
 
             <div className="flex-shrink-0">
               <VoteWidget
-                upvotes={item.votes || 0}
+                upvotes={item.upvotes || 0}
                 downvotes={0}
                 userVote={null}
                 onVote={() => {}}
@@ -297,7 +297,7 @@ await instance.initialize()`}</code>
         </div>
 
         {/* Action Bar */}
-        <div className="flex flex-wrap items-center gap-3 pb-6 border-b border-border">
+        <div className="flex flex-wrap items-center gap-3 pb-6 border-b border-[#D0D1C9]">
           <MagneticButton
             onClick={handleCopyCommand}
             className="flex items-center gap-2 px-4 py-2 bg-[#F54E00] text-white font-medium rounded-lg hover:bg-[#F54E00]/90 transition"
@@ -306,17 +306,17 @@ await instance.initialize()`}</code>
             {copied ? 'Copied!' : 'Copy install command'}
           </MagneticButton>
 
-          <button className="flex items-center gap-2 px-4 py-2 bg-[#E3E4DD] border border-border text-[#151515] rounded-lg hover:bg-[#D0D1C9] transition">
+          <button className="flex items-center gap-2 px-4 py-2 bg-[#E3E4DD] border border-[#D0D1C9] text-[#151515] rounded-lg hover:bg-[#D0D1C9] transition">
             <Heart className={cn('w-4 h-4', isStarred && 'fill-red text-red')} />
             Star
           </button>
 
           <div className="relative group">
-            <button className="flex items-center gap-2 px-4 py-2 bg-[#E3E4DD] border border-border text-[#151515] rounded-lg opacity-50 cursor-not-allowed">
+            <button className="flex items-center gap-2 px-4 py-2 bg-[#E3E4DD] border border-[#D0D1C9] text-[#151515] rounded-lg opacity-50 cursor-not-allowed">
               <Rocket className="w-4 h-4" />
               Deploy via AgentBrain
             </button>
-            <div className="absolute bottom-full left-0 mb-2 px-3 py-2 bg-black border border-border rounded text-xs text-[#6B6E66] whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none z-10">
+            <div className="absolute bottom-full left-0 mb-2 px-3 py-2 bg-black border border-[#D0D1C9] rounded text-xs text-[#6B6E66] whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none z-10">
               Coming soon
             </div>
           </div>
@@ -362,7 +362,7 @@ await instance.initialize()`}</code>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-border space-y-3">
+            <div className="pt-4 border-t border-[#D0D1C9] space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[#6B6E66] text-sm">Karma</span>
                 <span className="font-semibold text-[#151515]">{formatNumber(item.author.karma)}</span>
@@ -374,7 +374,7 @@ await instance.initialize()`}</code>
             </div>
 
             <Link
-              to={`/profile/${item.author.username}`}
+              to={`/u/${item.author.username}`}
               className="block w-full px-4 py-2 text-center bg-[#E3E4DD] text-[#F54E00] rounded-lg hover:bg-[#D0D1C9] transition font-medium text-sm"
             >
               View profile
@@ -398,13 +398,13 @@ await instance.initialize()`}</code>
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-[#151515] group-hover:text-[#F54E00] transition truncate">
-                          {relItem.name}
+                          {relItem.title}
                         </p>
                         <p className="text-xs text-[#6B6E66] mt-1">{relItem.downloads} downloads</p>
                       </div>
                       <div className="flex-shrink-0 flex items-center gap-1 text-[#6B6E66] text-xs">
                         <span>↑</span>
-                        <span>{formatNumber(relItem.votes)}</span>
+                        <span>{formatNumber(relItem.upvotes)}</span>
                       </div>
                     </div>
                   </Link>
@@ -421,17 +421,17 @@ await instance.initialize()`}</code>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-[#E3E4DD] rounded-lg p-3 text-center">
-                <p className="text-2xl font-bold text-[#F54E00]">{formatNumber(item.usedBy)}</p>
+                <p className="text-2xl font-bold text-[#F54E00]">{formatNumber(item.downloads)}</p>
                 <p className="text-xs text-[#6B6E66] mt-1">Projects</p>
               </div>
 
               <div className="bg-[#E3E4DD] rounded-lg p-3 text-center">
-                <p className="text-2xl font-bold text-amber">{item.rating.toFixed(1)}</p>
+                <p className="text-2xl font-bold text-[#F7B200]">{item.rating.toFixed(1)}</p>
                 <p className="text-xs text-[#6B6E66] mt-1">Rating</p>
               </div>
 
               <div className="bg-[#E3E4DD] rounded-lg p-3 col-span-2">
-                <p className="text-2xl font-bold text-blue">{formatNumber(item.downloads)}</p>
+                <p className="text-2xl font-bold text-[#1D4AFF]">{formatNumber(item.downloads)}</p>
                 <p className="text-xs text-[#6B6E66] mt-1">Downloads</p>
               </div>
             </div>

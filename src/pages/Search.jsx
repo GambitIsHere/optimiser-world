@@ -103,7 +103,7 @@ export default function Search() {
               {CATEGORIES.slice(0, 4).map((cat) => (
                 <Link
                   key={cat.id}
-                  to={`/category/${cat.slug}`}
+                  to={`/c/${cat.slug}`}
                   className="p-3 rounded-lg bg-[#E3E4DD] hover:bg-white transition-colors"
                 >
                   <p className="text-sm font-medium text-[#F54E00]">{cat.name}</p>
@@ -132,14 +132,14 @@ export default function Search() {
                           className={cn(
                             'px-2 py-1 rounded text-xs font-semibold',
                             item.type === 'agent'
-                              ? 'bg-blue/20 text-blue'
-                              : 'bg-violet/20 text-violet'
+                              ? 'bg-[#1D4AFF]/20 text-[#1D4AFF]'
+                              : 'bg-[#C79EF5]/20 text-[#C79EF5]'
                           )}
                         >
                           {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
                         </span>
                         {item.featured && (
-                          <span className="px-2 py-1 rounded text-xs font-semibold bg-amber/20 text-amber">
+                          <span className="px-2 py-1 rounded text-xs font-semibold bg-[#F7B200]/20 text-[#F7B200]">
                             Featured
                           </span>
                         )}

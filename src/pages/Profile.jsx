@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { ExternalLink, Calendar } from 'lucide-react'
 import GlassCard from '../components/ui/GlassCard'
 import KarmaBadge from '../components/marketplace/KarmaBadge'
@@ -146,14 +146,15 @@ export default function Profile() {
               ) : (
                 <div className="grid md:grid-cols-2 gap-6">
                   {userSubmissions.map((item) => (
-                    <GlassCard key={item.id} className="p-6">
+                    <Link key={item.id} to={`/item/${item.slug}`}>
+                    <GlassCard className="p-6">
                       <div className="mb-3">
                         <span
                           className={cn(
                             'px-2 py-1 rounded text-xs font-semibold inline-block',
                             item.type === 'agent'
-                              ? 'bg-blue/20 text-blue'
-                              : 'bg-violet/20 text-violet'
+                              ? 'bg-[#1D4AFF]/20 text-[#1D4AFF]'
+                              : 'bg-[#C79EF5]/20 text-[#C79EF5]'
                           )}
                         >
                           {item.type.charAt(0).toUpperCase() +
@@ -171,6 +172,7 @@ export default function Profile() {
                         <span>{formatNumber(item.downloads)} downloads</span>
                       </div>
                     </GlassCard>
+                    </Link>
                   ))}
                 </div>
               )}

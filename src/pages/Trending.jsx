@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import SEO from '../components/ui/SEO'
 import { useItems, CATEGORIES, TRENDING_TAGS } from '../hooks/useItems'
 import GlassCard from '../components/ui/GlassCard'
@@ -72,7 +73,8 @@ export default function Trending() {
                   {/* Items Grid */}
                   <div className="grid md:grid-cols-3 gap-6">
                     {items.map((item, idx) => (
-                      <GlassCard key={item.id} className="p-6 hover" hover>
+                      <Link key={item.id} to={`/item/${item.slug}`}>
+                      <GlassCard className="p-6 hover" hover>
                         {/* Rank Badge */}
                         <div className="mb-4 flex items-start justify-between">
                           <span
@@ -88,8 +90,8 @@ export default function Trending() {
                             className={cn(
                               'px-2 py-1 rounded text-xs font-semibold',
                               item.type === 'agent'
-                                ? 'bg-blue/20 text-blue'
-                                : 'bg-violet/20 text-violet'
+                                ? 'bg-[#1D4AFF]/20 text-[#1D4AFF]'
+                                : 'bg-[#C79EF5]/20 text-[#C79EF5]'
                             )}
                           >
                             {item.type.charAt(0).toUpperCase() +
@@ -150,6 +152,7 @@ export default function Trending() {
                           Updated {timeAgo(item.updatedAt)}
                         </p>
                       </GlassCard>
+                      </Link>
                     ))}
                   </div>
                 </div>

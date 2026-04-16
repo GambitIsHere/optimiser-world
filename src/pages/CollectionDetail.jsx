@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import GlassCard from '../components/ui/GlassCard'
 import KarmaBadge from '../components/marketplace/KarmaBadge'
 import { MOCK_COLLECTIONS, MOCK_ITEMS } from '../lib/mockData'
@@ -105,20 +105,21 @@ export default function CollectionDetail() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {collectionItems.map((item) => (
-            <GlassCard key={item.id} className="p-6">
+            <Link key={item.id} to={`/item/${item.slug}`}>
+            <GlassCard className="p-6">
               <div className="mb-3">
                 <span
                   className={cn(
                     'px-2 py-1 rounded text-xs font-semibold inline-block',
                     item.type === 'agent'
-                      ? 'bg-blue/20 text-blue'
-                      : 'bg-violet/20 text-violet'
+                      ? 'bg-[#1D4AFF]/20 text-[#1D4AFF]'
+                      : 'bg-[#C79EF5]/20 text-[#C79EF5]'
                   )}
                 >
                   {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
                 </span>
                 {item.featured && (
-                  <span className="ml-2 px-2 py-1 rounded text-xs font-semibold bg-amber/20 text-amber">
+                  <span className="ml-2 px-2 py-1 rounded text-xs font-semibold bg-[#F7B200]/20 text-[#F7B200]">
                     Featured
                   </span>
                 )}
@@ -153,6 +154,7 @@ export default function CollectionDetail() {
                 <span>{timeAgo(item.updatedAt)}</span>
               </div>
             </GlassCard>
+            </Link>
           ))}
         </div>
 

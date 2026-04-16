@@ -286,9 +286,9 @@ $ optimiser search "conversion rate optimisation"`}
             If it works, it rises. If it doesn't — you'll know by tomorrow.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
-            <button className="font-semibold text-[15px] px-6 py-3 rounded-full bg-[#F54E00] text-white border border-white shadow-[3px_3px_0_#EEEFE9] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_#EEEFE9] transition">
+            <Link to="/submit" className="font-semibold text-[15px] px-6 py-3 rounded-full bg-[#F54E00] text-white border border-white shadow-[3px_3px_0_#EEEFE9] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_#EEEFE9] transition">
               + Submit a skill
-            </button>
+            </Link>
             <a href="https://docs.optimiser.world" className="font-semibold text-[15px] px-6 py-3 rounded-full bg-transparent text-white border border-white hover:bg-white hover:text-[#151515] transition">
               Read the docs
             </a>

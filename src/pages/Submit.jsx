@@ -194,7 +194,7 @@ export default function Submit() {
                     onClick={() => handleTypeSelect('skill')}
                     className="p-8 flex flex-col items-center justify-center cursor-pointer"
                   >
-                    <Zap size={48} className="text-violet mb-4" />
+                    <Zap size={48} className="text-[#C79EF5] mb-4" />
                     <h3 className="text-xl font-bold text-[#151515] mb-2">Skill</h3>
                     <p className="text-[#6B6E66] text-center">
                       A reusable toolkit or framework for developers

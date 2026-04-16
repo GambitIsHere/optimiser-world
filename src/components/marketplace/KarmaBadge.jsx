@@ -8,6 +8,13 @@ const tierColors = {
   bronze: '#92400E',
 }
 
+const tierIcons = {
+  diamond: 'sparkles',
+  gold: 'star',
+  silver: 'circle',
+  bronze: 'circle',
+}
+
 export default function KarmaBadge({ karma }) {
   const tier = getKarmaTier(karma)
 
@@ -18,7 +25,7 @@ export default function KarmaBadge({ karma }) {
 
   let IconComponent = null
 
-  switch (tier.icon) {
+  switch (tierIcons[tier.tier]) {
     case 'sparkles':
       IconComponent = <Sparkles {...iconProps} />
       break
@@ -33,9 +40,9 @@ export default function KarmaBadge({ karma }) {
   }
 
   return (
-    <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/10">
+    <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#E3E4DD] border border-[#D0D1C9]">
       {IconComponent}
-      <span className="text-xs font-semibold text-white/80">{formatNumber(karma)}</span>
+      <span className="text-xs font-semibold text-[#151515]">{formatNumber(karma)}</span>
     </div>
   )
 }

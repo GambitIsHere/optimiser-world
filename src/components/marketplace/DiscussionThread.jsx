@@ -35,7 +35,7 @@ export default function DiscussionThread({ comments = [], itemSlug }) {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Share your thoughts..."
-          className="w-full px-4 py-3 bg-[#E3E4DD] border border-border rounded-lg text-[#151515] placeholder-[#6B6E66] focus:outline-none focus:border-[#F54E00]/50 focus:ring-1 focus:ring-[#F54E00]/30 resize-none"
+          className="w-full px-4 py-3 bg-[#E3E4DD] border border-[#D0D1C9] rounded-lg text-[#151515] placeholder-[#6B6E66] focus:outline-none focus:border-[#F54E00]/50 focus:ring-1 focus:ring-[#F54E00]/30 resize-none"
           rows={3}
         />
         <button
@@ -63,7 +63,7 @@ export default function DiscussionThread({ comments = [], itemSlug }) {
 
             return (
               <div key={comment.id} className="space-y-3">
-                <div className="bg-[#E3E4DD] border border-border rounded-lg p-4">
+                <div className="bg-[#E3E4DD] border border-[#D0D1C9] rounded-lg p-4">
                   <div className="flex gap-4">
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 bg-gradient-to-br from-[#F54E00] to-[#FFF287] rounded-full flex items-center justify-center font-bold text-white text-sm">
@@ -111,7 +111,7 @@ export default function DiscussionThread({ comments = [], itemSlug }) {
                       return (
                         <div
                           key={reply.id}
-                          className="bg-[#E3E4DD] border border-border rounded-lg p-4"
+                          className="bg-[#E3E4DD] border border-[#D0D1C9] rounded-lg p-4"
                         >
                           <div className="flex gap-4">
                             <div className="flex-shrink-0">

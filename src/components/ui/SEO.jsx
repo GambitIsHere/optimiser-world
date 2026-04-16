@@ -1,12 +1,12 @@
 import { Helmet } from 'react-helmet-async'
 
 const DEFAULTS = {
-  siteName: 'Optimiser.Pro',
-  titleSuffix: ' | Optimiser.Pro',
-  description: 'AI-powered product intelligence. Observe every user flow, diagnose revenue leaks, and ship fixes before your customers notice.',
-  url: 'https://optimiser.pro',
-  image: 'https://optimiser.pro/og-image.png',
-  twitterHandle: '@optimiserpro',
+  siteName: 'Optimiser.World',
+  titleSuffix: ' | Optimiser.World',
+  description: 'The marketplace that ranks itself. Agent runs produce votes. Votes produce ranks. Hot skills rise. Broken ones sink.',
+  url: 'https://optimiser.world',
+  image: 'https://optimiser.world/og-image.png',
+  twitterHandle: '@optimiserworld',
 }
 
 /**
