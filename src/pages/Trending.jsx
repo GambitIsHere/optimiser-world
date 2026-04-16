@@ -24,24 +24,24 @@ export default function Trending() {
   }
 
   const colorMap = {
-    'cro-growth': '#00E5A0',
+    'cro-growth': '#F54E00',
     'devops': '#5B8DEF',
     'content': '#A855F7',
     'analytics': '#FBBF24',
     'design': '#EC4899',
     'product': '#F97316',
     'finance': '#FBBF24',
-    'starter-kits': '#00E5A0',
+    'starter-kits': '#F54E00',
   }
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-[#EEEFE9]">
       <SEO title="Trending" description="The hottest AI agents and skills, updated hourly." path="/trending" />
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold text-white mb-2">Trending Now</h1>
-          <p className="text-white/60 text-lg">
+          <h1 className="text-4xl font-bold text-[#151515] mb-2">Trending Now</h1>
+          <p className="text-[#6B6E66] text-lg">
             The hottest agents and skills, updated hourly
           </p>
         </div>
@@ -51,7 +51,7 @@ export default function Trending() {
           <div className="lg:col-span-2 space-y-12">
             {CATEGORIES.filter((cat) => cat.count > 0).map((category) => {
               const items = getTopItemsByCategory(category.id)
-              const accentColor = colorMap[category.id] || '#00E5A0'
+              const accentColor = colorMap[category.id] || '#F54E00'
 
               return (
                 <div key={category.id}>
@@ -61,10 +61,10 @@ export default function Trending() {
                       className="w-3 h-3 rounded-full"
                       style={{ backgroundColor: accentColor }}
                     />
-                    <h2 className="text-2xl font-bold text-white">
+                    <h2 className="text-2xl font-bold text-[#151515]">
                       {category.name}
                     </h2>
-                    <span className="ml-auto text-white/40 text-sm">
+                    <span className="ml-auto text-[#6B6E66] text-sm">
                       {category.count} total
                     </span>
                   </div>
@@ -76,7 +76,7 @@ export default function Trending() {
                         {/* Rank Badge */}
                         <div className="mb-4 flex items-start justify-between">
                           <span
-                            className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white"
+                            className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[#151515]"
                             style={{
                               backgroundColor: `${accentColor}30`,
                               color: accentColor,
@@ -98,26 +98,26 @@ export default function Trending() {
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-lg font-bold text-white mb-2">
+                        <h3 className="text-lg font-bold text-[#151515] mb-2">
                           {item.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-white/60 text-sm mb-4 line-clamp-2">
+                        <p className="text-[#6B6E66] text-sm mb-4 line-clamp-2">
                           {item.shortDescription}
                         </p>
 
                         {/* Author */}
-                        <div className="flex items-center gap-2 mb-4 pb-4 border-b border-white/[0.06]">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-mint to-blue flex items-center justify-center flex-shrink-0">
-                            <span className="text-xs font-bold text-bg">
+                        <div className="flex items-center gap-2 mb-4 pb-4 border-b border-[#D0D1C9]">
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#F54E00] to-[#FFF287] flex items-center justify-center flex-shrink-0">
+                            <span className="text-xs font-bold text-white">
                               {item.author.displayName
                                 .charAt(0)
                                 .toUpperCase()}
                             </span>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-white text-xs font-medium truncate">
+                            <p className="text-[#151515] text-xs font-medium truncate">
                               {item.author.displayName}
                             </p>
                           </div>
@@ -132,7 +132,7 @@ export default function Trending() {
                             >
                               {formatNumber(item.upvotes)}
                             </p>
-                            <p className="text-white/60 text-xs">Upvotes</p>
+                            <p className="text-[#6B6E66] text-xs">Upvotes</p>
                           </div>
                           <div>
                             <p
@@ -141,12 +141,12 @@ export default function Trending() {
                             >
                               {formatNumber(item.downloads)}
                             </p>
-                            <p className="text-white/60 text-xs">Downloads</p>
+                            <p className="text-[#6B6E66] text-xs">Downloads</p>
                           </div>
                         </div>
 
                         {/* Updated */}
-                        <p className="text-white/40 text-xs mt-4">
+                        <p className="text-[#6B6E66] text-xs mt-4">
                           Updated {timeAgo(item.updatedAt)}
                         </p>
                       </GlassCard>
@@ -160,7 +160,7 @@ export default function Trending() {
           {/* Sidebar - Trending Tags */}
           <div>
             <GlassCard className="p-6 sticky top-24">
-              <h3 className="text-xl font-bold text-white mb-6">
+              <h3 className="text-xl font-bold text-[#151515] mb-6">
                 Trending Tags
               </h3>
 
@@ -185,25 +185,25 @@ export default function Trending() {
               </div>
 
               {/* Tag Stats */}
-              <div className="mt-8 pt-8 border-t border-white/[0.06] space-y-4">
+              <div className="mt-8 pt-8 border-t border-[#D0D1C9] space-y-4">
                 <div>
-                  <p className="text-white/60 text-sm mb-1">Top Tag</p>
-                  <p className="text-white font-semibold">automation</p>
-                  <p className="text-white/40 text-xs">234 items</p>
+                  <p className="text-[#6B6E66] text-sm mb-1">Top Tag</p>
+                  <p className="text-[#151515] font-semibold">automation</p>
+                  <p className="text-[#6B6E66] text-xs">234 items</p>
                 </div>
 
                 <div>
-                  <p className="text-white/60 text-sm mb-1">Growing Tag</p>
-                  <p className="text-white font-semibold">ai-agents</p>
-                  <p className="text-white/40 text-xs">
+                  <p className="text-[#6B6E66] text-sm mb-1">Growing Tag</p>
+                  <p className="text-[#151515] font-semibold">ai-agents</p>
+                  <p className="text-[#6B6E66] text-xs">
                     +45 items this month
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-white/60 text-sm mb-1">Most Rated</p>
-                  <p className="text-white font-semibold">claude-code</p>
-                  <p className="text-white/40 text-xs">9.1 avg rating</p>
+                  <p className="text-[#6B6E66] text-sm mb-1">Most Rated</p>
+                  <p className="text-[#151515] font-semibold">claude-code</p>
+                  <p className="text-[#6B6E66] text-xs">9.1 avg rating</p>
                 </div>
               </div>
             </GlassCard>

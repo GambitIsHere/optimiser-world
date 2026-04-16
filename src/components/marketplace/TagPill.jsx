@@ -1,7 +1,7 @@
 import { cn } from '../../utils'
 
 const colorMap = {
-  mint: '#00E5A0',
+  mint: '#F54E00',
   blue: '#5B8DEF',
   violet: '#A855F7',
   amber: '#FBBF24',

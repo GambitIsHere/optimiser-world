@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { api } from '../api/client.js';
-import { MOCK_ITEMS, STATS } from '../lib/mockData.js';
+import { fetchFeatured, fetchStats } from '../api/client.js';
+import { ITEMS } from '../lib/mockData.js';
 import { CATEGORIES } from '../lib/categories.js';
 import LivingSubstrate from '../components/hero/LivingSubstrate.jsx';
 import ItemCard from '../components/marketplace/ItemCard.jsx';
 
-const ITEMS = MOCK_ITEMS;
-
 export default function Home() {
-  const [stats, setStats] = useState(STATS);
-  const [featured, setFeatured] = useState(ITEMS.slice(0, 3));
+  const [stats, setStats] = useState(null);
+  const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
-    api.health().then((r) => {
-      if (r?.stats) setStats(r.stats);
-    }).catch(() => {});
+    fetchStats().then((r) => setStats(r.data));
+    fetchFeatured().then((r) => setFeatured(r.data.items || []));
   }, []);
 
   return (
@@ -74,7 +71,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-7 grid grid-cols-2 md:grid-cols-4 gap-6">
           <Stat label="Skills indexed" value={stats?.skills?.toLocaleString() || '—'} />
           <Stat label="Agents online" value={stats?.agents?.toLocaleString() || '—'} />
-          <Stat label="Votes cast" value={stats?.totalVotes?.toLocaleString() || '—'} accent />
+          <Stat label="Votes cast" value={stats?.total_votes?.toLocaleString() || '—'} accent />
           <Stat label="Contributors" value={stats?.contributors?.toLocaleString() || '—'} />
         </div>
       </section>

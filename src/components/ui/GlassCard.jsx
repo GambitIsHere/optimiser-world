@@ -5,8 +5,8 @@ export default function GlassCard({ children, className, hover = false, onClick 
     <div
       onClick={onClick}
       className={cn(
-        'bg-surface/60 backdrop-blur-xl border border-white/[0.06] rounded-xl',
-        hover && 'transition-all duration-200 hover:border-white/10 hover:bg-surface/80 cursor-pointer hover:scale-[1.01]',
+        'bg-white border border-[#151515] rounded-[10px] shadow-[3px_3px_0_#151515]',
+        hover && 'transition-all duration-120 hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[4px_4px_0_#151515] cursor-pointer',
         onClick && 'cursor-pointer',
         className
       )}

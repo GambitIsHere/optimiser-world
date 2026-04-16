@@ -127,7 +127,7 @@ export default function Submit() {
     .filter(Boolean)
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-[#EEEFE9]">
       <div className="max-w-3xl mx-auto px-6 py-12">
         {/* Progress Bar */}
         <div className="mb-12">
@@ -138,19 +138,19 @@ export default function Submit() {
                 className={cn(
                   'w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all',
                   currentStep === step
-                    ? 'bg-mint text-bg'
+                    ? 'bg-[#F54E00] text-white'
                     : currentStep > step
-                      ? 'bg-mint/30 text-mint'
-                      : 'bg-surface/40 text-white/40'
+                      ? 'bg-[#FEE8DE] text-[#F54E00]'
+                      : 'bg-[#E3E4DD] text-[#6B6E66]'
                 )}
               >
                 {step}
               </div>
             ))}
           </div>
-          <div className="w-full h-1 bg-surface/40 rounded-full overflow-hidden">
+          <div className="w-full h-1 bg-[#E3E4DD] rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-mint"
+              className="h-full bg-[#F54E00]"
               initial={{ width: '20%' }}
               animate={{ width: `${(currentStep / 5) * 100}%` }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -169,10 +169,10 @@ export default function Submit() {
           >
             {currentStep === 1 && (
               <div>
-                <h2 className="text-3xl font-bold text-white mb-2">
+                <h2 className="text-3xl font-bold text-[#151515] mb-2">
                   What are you publishing?
                 </h2>
-                <p className="text-white/60 mb-8">
+                <p className="text-[#6B6E66] mb-8">
                   Choose whether you're sharing an Agent or a Skill
                 </p>
 
@@ -183,8 +183,8 @@ export default function Submit() {
                     className="p-8 flex flex-col items-center justify-center cursor-pointer"
                   >
                     <Bot size={48} className="text-blue mb-4" />
-                    <h3 className="text-xl font-bold text-white mb-2">Agent</h3>
-                    <p className="text-white/60 text-center">
+                    <h3 className="text-xl font-bold text-[#151515] mb-2">Agent</h3>
+                    <p className="text-[#6B6E66] text-center">
                       An AI agent that automates tasks and integrations
                     </p>
                   </GlassCard>
@@ -195,8 +195,8 @@ export default function Submit() {
                     className="p-8 flex flex-col items-center justify-center cursor-pointer"
                   >
                     <Zap size={48} className="text-violet mb-4" />
-                    <h3 className="text-xl font-bold text-white mb-2">Skill</h3>
-                    <p className="text-white/60 text-center">
+                    <h3 className="text-xl font-bold text-[#151515] mb-2">Skill</h3>
+                    <p className="text-[#6B6E66] text-center">
                       A reusable toolkit or framework for developers
                     </p>
                   </GlassCard>
@@ -206,10 +206,10 @@ export default function Submit() {
 
             {currentStep === 2 && (
               <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-white">Basic Info</h2>
+                <h2 className="text-3xl font-bold text-[#151515]">Basic Info</h2>
 
                 <div>
-                  <label htmlFor="submit-title" className="block text-white font-medium mb-2">
+                  <label htmlFor="submit-title" className="block text-[#151515] font-medium mb-2">
                     Title
                   </label>
                   <input
@@ -219,10 +219,10 @@ export default function Submit() {
                     onChange={(e) => handleChange('title', e.target.value)}
                     placeholder="e.g., GA4 Conversion Watchdog"
                     className={cn(
-                      'w-full px-4 py-3 bg-surface/60 border rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all',
+                      'w-full px-4 py-3 bg-white border rounded-lg text-[#151515] placeholder-[#6B6E66] focus:outline-none focus:border-[#D0D1C9] transition-all',
                       errors.title
                         ? 'border-red'
-                        : 'border-white/[0.06]'
+                        : 'border-[#D0D1C9]'
                     )}
                   />
                   {errors.title && (
@@ -231,7 +231,7 @@ export default function Submit() {
                 </div>
 
                 <div>
-                  <label htmlFor="submit-desc" className="block text-white font-medium mb-2">
+                  <label htmlFor="submit-desc" className="block text-[#151515] font-medium mb-2">
                     Description ({formData.description.length}/300)
                   </label>
                   <textarea
@@ -243,10 +243,10 @@ export default function Submit() {
                     placeholder="Brief description of what this does..."
                     rows="4"
                     className={cn(
-                      'w-full px-4 py-3 bg-surface/60 border rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all resize-none',
+                      'w-full px-4 py-3 bg-white border rounded-lg text-[#151515] placeholder-[#6B6E66] focus:outline-none focus:border-[#D0D1C9] transition-all resize-none',
                       errors.description
                         ? 'border-red'
-                        : 'border-white/[0.06]'
+                        : 'border-[#D0D1C9]'
                     )}
                   />
                   {errors.description && (
@@ -257,7 +257,7 @@ export default function Submit() {
                 </div>
 
                 <div>
-                  <label htmlFor="submit-category" className="block text-white font-medium mb-2">
+                  <label htmlFor="submit-category" className="block text-[#151515] font-medium mb-2">
                     Category
                   </label>
                   <select
@@ -267,10 +267,10 @@ export default function Submit() {
                       handleChange('category', e.target.value)
                     }
                     className={cn(
-                      'w-full px-4 py-3 bg-surface/60 border rounded-lg text-white focus:outline-none focus:border-white/20 transition-all',
+                      'w-full px-4 py-3 bg-white border rounded-lg text-[#151515] focus:outline-none focus:border-[#D0D1C9] transition-all',
                       errors.category
                         ? 'border-red'
-                        : 'border-white/[0.06]'
+                        : 'border-[#D0D1C9]'
                     )}
                   >
                     <option value="">Select a category</option>
@@ -286,7 +286,7 @@ export default function Submit() {
                 </div>
 
                 <div>
-                  <label htmlFor="submit-tags" className="block text-white font-medium mb-2">
+                  <label htmlFor="submit-tags" className="block text-[#151515] font-medium mb-2">
                     Tags (comma-separated)
                   </label>
                   <input
@@ -296,10 +296,10 @@ export default function Submit() {
                     onChange={(e) => handleChange('tags', e.target.value)}
                     placeholder="e.g., ga4, conversions, slack"
                     className={cn(
-                      'w-full px-4 py-3 bg-surface/60 border rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all',
+                      'w-full px-4 py-3 bg-white border rounded-lg text-[#151515] placeholder-[#6B6E66] focus:outline-none focus:border-[#D0D1C9] transition-all',
                       errors.tags
                         ? 'border-red'
-                        : 'border-white/[0.06]'
+                        : 'border-[#D0D1C9]'
                     )}
                   />
                   {errors.tags && (
@@ -310,7 +310,7 @@ export default function Submit() {
                       {tagsArray.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 rounded-full text-xs bg-mint/20 text-mint"
+                          className="px-2 py-1 rounded-full text-xs bg-[#FEE8DE] text-[#F54E00]"
                         >
                           {tag}
                         </span>
@@ -324,10 +324,10 @@ export default function Submit() {
             {currentStep === 3 && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-3xl font-bold text-white">README</h2>
+                  <h2 className="text-3xl font-bold text-[#151515]">README</h2>
                   <button
                     onClick={() => setShowPreview(!showPreview)}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface/40 hover:bg-surface/60 transition-colors text-white/60 hover:text-white text-sm"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#E3E4DD] hover:bg-white transition-colors text-[#6B6E66] hover:text-[#151515] text-sm"
                   >
                     {showPreview ? (
                       <>
@@ -343,7 +343,7 @@ export default function Submit() {
 
                 {!showPreview && (
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-[#151515] font-medium mb-2">
                       Markdown Content
                     </label>
                     <textarea
@@ -358,7 +358,7 @@ Run `optimiser install your-package`
 - **Feature 1** description
 - Feature 2 description"
                       rows="12"
-                      className="w-full px-4 py-3 bg-surface/60 border border-white/[0.06] rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all resize-none font-mono text-sm"
+                      className="w-full px-4 py-3 bg-white border border-[#D0D1C9] rounded-lg text-[#151515] placeholder-[#6B6E66] focus:outline-none focus:border-[#D0D1C9] transition-all resize-none font-mono text-sm"
                     />
                   </div>
                 )}
@@ -366,7 +366,7 @@ Run `optimiser install your-package`
                 {showPreview && (
                   <GlassCard className="p-6">
                     <div
-                      className="prose prose-invert max-w-none text-sm"
+                      className="prose max-w-none text-sm"
                       dangerouslySetInnerHTML={renderMarkdownPreview(
                         formData.readme
                       )}
@@ -378,21 +378,21 @@ Run `optimiser install your-package`
 
             {currentStep === 4 && (
               <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-white">Upload Files</h2>
+                <h2 className="text-3xl font-bold text-[#151515]">Upload Files</h2>
 
-                <GlassCard className="p-12 border-2 border-dashed border-white/[0.06]">
+                <GlassCard className="p-12 border-2 border-dashed border-[#D0D1C9]">
                   <div className="flex flex-col items-center justify-center text-center">
-                    <Upload size={48} className="text-white/40 mb-4" />
-                    <p className="text-white font-medium mb-2">
+                    <Upload size={48} className="text-[#6B6E66] mb-4" />
+                    <p className="text-[#151515] font-medium mb-2">
                       Drop files here
                     </p>
-                    <p className="text-white/60 text-sm">
+                    <p className="text-[#6B6E66] text-sm">
                       You can upload code files, documentation, or assets
                     </p>
                   </div>
                 </GlassCard>
 
-                <p className="text-white/60 text-sm">
+                <p className="text-[#6B6E66] text-sm">
                   This is a preview. File uploads will be implemented in the
                   next phase.
                 </p>
@@ -401,20 +401,20 @@ Run `optimiser install your-package`
 
             {currentStep === 5 && (
               <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-white">Review</h2>
+                <h2 className="text-3xl font-bold text-[#151515]">Review</h2>
 
                 <div className="space-y-4">
                   <GlassCard className="p-6">
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <p className="text-white/60 mb-1">Type</p>
-                        <p className="text-white font-semibold capitalize">
+                        <p className="text-[#6B6E66] mb-1">Type</p>
+                        <p className="text-[#151515] font-semibold capitalize">
                           {formData.type}
                         </p>
                       </div>
                       <div>
-                        <p className="text-white/60 mb-1">Category</p>
-                        <p className="text-white font-semibold">
+                        <p className="text-[#6B6E66] mb-1">Category</p>
+                        <p className="text-[#151515] font-semibold">
                           {
                             CATEGORIES.find((c) => c.id === formData.category)
                               ?.name
@@ -422,22 +422,22 @@ Run `optimiser install your-package`
                         </p>
                       </div>
                       <div className="col-span-2">
-                        <p className="text-white/60 mb-1">Title</p>
-                        <p className="text-white font-semibold">
+                        <p className="text-[#6B6E66] mb-1">Title</p>
+                        <p className="text-[#151515] font-semibold">
                           {formData.title}
                         </p>
                       </div>
                       <div className="col-span-2">
-                        <p className="text-white/60 mb-1">Description</p>
-                        <p className="text-white">{formData.description}</p>
+                        <p className="text-[#6B6E66] mb-1">Description</p>
+                        <p className="text-[#151515]">{formData.description}</p>
                       </div>
                       <div className="col-span-2">
-                        <p className="text-white/60 mb-2">Tags</p>
+                        <p className="text-[#6B6E66] mb-2">Tags</p>
                         <div className="flex flex-wrap gap-2">
                           {tagsArray.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2 py-1 rounded-full text-xs bg-mint/20 text-mint"
+                              className="px-2 py-1 rounded-full text-xs bg-[#FEE8DE] text-[#F54E00]"
                             >
                               {tag}
                             </span>
@@ -457,7 +457,7 @@ Run `optimiser install your-package`
           {currentStep > 1 && (
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface/40 hover:bg-surface/60 transition-colors text-white font-medium"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#E3E4DD] hover:bg-white transition-colors text-[#151515] font-medium"
             >
               <ChevronLeft size={20} /> Back
             </button>
@@ -466,7 +466,7 @@ Run `optimiser install your-package`
           {currentStep < 5 && (
             <button
               onClick={handleNext}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-mint text-bg font-medium hover:bg-mint/80 transition-colors ml-auto"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#F54E00] text-white font-medium hover:bg-[#F54E00]/80 transition-colors ml-auto"
             >
               Next <ChevronRight size={20} />
             </button>
@@ -476,7 +476,7 @@ Run `optimiser install your-package`
             <button
               onClick={handlePublish}
               disabled={isPublishing}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-mint text-bg font-medium hover:bg-mint/80 transition-colors ml-auto disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#F54E00] text-white font-medium hover:bg-[#F54E00]/80 transition-colors ml-auto disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isPublishing ? (
                 <>
@@ -488,7 +488,7 @@ Run `optimiser install your-package`
             </button>
           )}
           {publishSuccess && (
-            <div className="flex items-center gap-2 text-mint ml-auto">
+            <div className="flex items-center gap-2 text-[#F54E00] ml-auto">
               <CheckCircle2 size={20} />
               <span className="font-medium">Published! Redirecting...</span>
             </div>

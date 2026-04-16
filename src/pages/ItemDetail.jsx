@@ -13,7 +13,7 @@ export default function ItemDetailPage() {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-2 border-mint/30 border-t-mint rounded-full animate-spin" />
-          <span className="text-white/40 text-sm">Loading...</span>
+          <span className="text-[#6B6E66] text-sm">Loading...</span>
         </div>
       </div>
     )
@@ -22,9 +22,9 @@ export default function ItemDetailPage() {
   if (!item) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">Item not found</h2>
-        <p className="text-white/50 mb-4">The item you're looking for doesn't exist.</p>
-        <Link to="/browse" className="text-mint hover:underline">Back to marketplace</Link>
+        <h2 className="text-2xl font-bold text-[#151515] mb-2">Item not found</h2>
+        <p className="text-[#6B6E66] mb-4">The item you're looking for doesn't exist.</p>
+        <Link to="/browse" className="text-[#F54E00] hover:underline">Back to marketplace</Link>
       </div>
     )
   }

@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ── Optimiser.Pro Midnight Design Tokens ── */
+@theme {
+  --color-bg: #0A0E1A;
+  --color-surface: #111827;
+  --color-surface-2: #1A2235;
+  --color-surface-3: #0F172A;
+  --color-mint: #00E5A0;
+  --color-blue: #5B8DEF;
+  --color-violet: #A855F7;
+  --color-amber: #FBBF24;
+  --color-red: #FF6B6B;
+  --color-pink: #EC4899;
+  --color-orange: #F97316;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', 'Consolas', monospace;
+}
+
+/* ── Base ── */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* ── Glass Card ── */
+.glass-card {
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+}
+
+/* ── Magnetic Hover ── */
+.magnetic-hover {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  cursor: pointer;
+}
+.magnetic-hover:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 32px rgba(0, 229, 160, 0.08);
+}
+
+/* ── Pulse Ring (loading) ── */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.pulse-ring-loader {
+  position: relative;
+}
+.pulse-ring-loader::before,
+.pulse-ring-loader::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--color-mint);
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.pulse-ring-loader::after {
+  animation-delay: 0.5s;
+}
+
+/* ── Scan Line ── */
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ── AI Typing Cursor ── */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.ai-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--color-mint);
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(0, 229, 160, 0.25);
+  color: white;
+}
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--color-mint);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

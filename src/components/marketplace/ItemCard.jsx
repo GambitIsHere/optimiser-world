@@ -43,36 +43,36 @@ export default function ItemCard({ item }) {
             <TypeIcon size={12} />
             {item.type}
           </span>
-          <span className="text-white/30 text-xs">{item.category}</span>
+          <span className="text-[#6B6E66] text-xs">{item.category}</span>
           {item.featured && (
             <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-amber/15 text-amber">
               Featured
             </span>
           )}
-          <span className="text-white/20 text-xs ml-auto">{timeAgo(item.createdAt)}</span>
+          <span className="text-[#6B6E66] text-xs ml-auto">{timeAgo(item.createdAt)}</span>
         </div>
 
         {/* Title */}
         <Link
           to={`/item/${item.slug}`}
-          className="block text-white font-semibold hover:text-mint transition-colors line-clamp-2 mb-1"
+          className="block text-[#151515] font-semibold hover:text-[#F54E00] transition-colors line-clamp-2 mb-1"
         >
           {item.title}
         </Link>
 
         {/* Description */}
-        <p className="text-white/50 text-sm line-clamp-3 mb-3">
+        <p className="text-[#6B6E66] text-sm line-clamp-3 mb-3">
           {item.shortDescription}
         </p>
 
         {/* Bottom row */}
         <div className="flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex items-center gap-3 text-xs text-white/40">
+          <div className="flex items-center gap-3 text-xs text-[#6B6E66]">
             <Link
               to={`/user/${item.author.username}`}
-              className="flex items-center gap-1.5 hover:text-white/70 transition-colors"
+              className="flex items-center gap-1.5 hover:text-[#2E2E2E] transition-colors"
             >
-              <div className="w-5 h-5 rounded-full bg-surface-2 flex items-center justify-center text-[10px] font-bold text-white/60">
+              <div className="w-5 h-5 rounded-full bg-[#E3E4DD] flex items-center justify-center text-[10px] font-bold text-[#6B6E66]">
                 {item.author.displayName.charAt(0)}
               </div>
               <span>@{item.author.username}</span>

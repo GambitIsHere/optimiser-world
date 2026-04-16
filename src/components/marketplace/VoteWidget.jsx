@@ -44,7 +44,7 @@ export default function VoteWidget({
             style={{
               width: isLarge ? 48 : isHorizontal ? 32 : 40,
               height: isLarge ? 48 : isHorizontal ? 32 : 40,
-              border: `2px solid ${pulseType === 'up' ? '#00E5A0' : '#FF6B6B'}`,
+              border: `2px solid ${pulseType === 'up' ? '#F54E00' : '#FF6B6B'}`,
             }}
             initial={{ scale: 0.8, opacity: 1 }}
             animate={{ scale: 2, opacity: 0 }}
@@ -60,8 +60,8 @@ export default function VoteWidget({
           'flex items-center justify-center rounded-md transition-colors duration-150 flex-shrink-0',
           isLarge ? 'w-10 h-10' : isHorizontal ? 'w-6 h-6' : 'w-7 h-7',
           userVote === 'up'
-            ? 'text-mint bg-mint/10'
-            : 'text-white/30 hover:text-mint hover:bg-mint/5'
+            ? 'text-[#F54E00] bg-[#FEE8DE]'
+            : 'text-[#6B6E66] hover:text-[#F54E00] hover:bg-[#FEE8DE]'
         )}
         aria-label="Upvote"
         aria-pressed={userVote === 'up'}
@@ -87,10 +87,10 @@ export default function VoteWidget({
             className={cn(
               'block',
               userVote === 'up'
-                ? 'text-mint'
+                ? 'text-[#F54E00]'
                 : userVote === 'down'
                   ? 'text-red'
-                  : 'text-white/70'
+                  : 'text-[#6B6E66]'
             )}
           >
             {formatNumber(score)}
@@ -106,7 +106,7 @@ export default function VoteWidget({
           isLarge ? 'w-10 h-10' : isHorizontal ? 'w-6 h-6' : 'w-7 h-7',
           userVote === 'down'
             ? 'text-red bg-red/10'
-            : 'text-white/30 hover:text-red hover:bg-red/5'
+            : 'text-[#6B6E66] hover:text-red hover:bg-red/5'
         )}
         aria-label="Downvote"
         aria-pressed={userVote === 'down'}

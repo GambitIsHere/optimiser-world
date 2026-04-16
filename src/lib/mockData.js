@@ -1,12 +1,12 @@
 export const CATEGORIES = [
-  { id: 'cro-growth', name: 'CRO & Growth', icon: 'TrendingUp', color: '#00E5A0', slug: 'cro-growth', count: 24 },
+  { id: 'cro-growth', name: 'CRO & Growth', icon: 'TrendingUp', color: '#F54E00', slug: 'cro-growth', count: 24 },
   { id: 'devops', name: 'DevOps & Deploy', icon: 'Server', color: '#5B8DEF', slug: 'devops', count: 18 },
   { id: 'content', name: 'Content & Copy', icon: 'PenTool', color: '#A855F7', slug: 'content', count: 15 },
   { id: 'analytics', name: 'Analytics & Data', icon: 'BarChart2', color: '#FBBF24', slug: 'analytics', count: 21 },
   { id: 'design', name: 'Design & UI', icon: 'Palette', color: '#EC4899', slug: 'design', count: 12 },
   { id: 'product', name: 'Product & Research', icon: 'Lightbulb', color: '#F97316', slug: 'product', count: 9 },
   { id: 'finance', name: 'Finance & Ops', icon: 'DollarSign', color: '#FBBF24', slug: 'finance', count: 7 },
-  { id: 'starter-kits', name: 'Starter Kits', icon: 'Package', color: '#00E5A0', slug: 'starter-kits', count: 5 },
+  { id: 'starter-kits', name: 'Starter Kits', icon: 'Package', color: '#F54E00', slug: 'starter-kits', count: 5 },
 ];
 
 export const MOCK_ITEMS = [

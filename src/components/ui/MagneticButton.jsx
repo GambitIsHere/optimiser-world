@@ -1,33 +1,15 @@
-import { motion } from 'framer-motion'
 import { cn } from '../../utils'
 
-export default function MagneticButton({
-  children,
-  variant = 'primary',
-  className,
-  onClick,
-  disabled = false,
-}) {
-  const variantClasses = {
-    primary: 'bg-mint text-bg font-bold hover:opacity-90',
-    secondary: 'bg-surface-2 border border-white/10 text-white hover:bg-surface hover:border-white/20',
-    ghost: 'transparent text-white/60 hover:text-white',
+export default function MagneticButton({ children, className, variant = 'primary', ...props }) {
+  const base = 'inline-flex items-center gap-2 font-semibold text-[14px] px-5 py-2.5 rounded-full border border-[#151515] shadow-[3px_3px_0_#151515] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_#151515] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0_#151515] transition'
+  const variants = {
+    primary: 'bg-[#F54E00] text-white',
+    secondary: 'bg-white text-[#151515]',
   }
 
   return (
-    <motion.button
-      onClick={onClick}
-      disabled={disabled}
-      whileHover={!disabled ? { scale: 1.02 } : {}}
-      whileTap={!disabled ? { scale: 0.98 } : {}}
-      className={cn(
-        'px-4 py-2 rounded-lg transition-all duration-200 font-medium',
-        'disabled:opacity-50 disabled:cursor-not-allowed',
-        variantClasses[variant],
-        className
-      )}
-    >
+    <button className={cn(base, variants[variant], className)} {...props}>
       {children}
-    </motion.button>
+    </button>
   )
 }

@@ -45,13 +45,13 @@ export default function Browse() {
   const hasActiveFilters = category !== 'all' || type !== 'all'
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-[#EEEFE9]">
       <SEO title="Marketplace" description="Browse AI agents and skills. Discover automation tools built by the community." path="/browse" />
       {/* Header */}
-      <div className="bg-surface/30 backdrop-blur-xl border-b border-white/[0.06] sticky top-0 z-40 py-6">
+      <div className="bg-white border-b border-[#D0D1C9] sticky top-0 z-40 py-6">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold text-white">Marketplace</h1>
+            <h1 className="text-3xl font-bold text-[#151515]">Marketplace</h1>
             <div className="hidden md:block">
               <SortToggle
                 value={sortBy}
@@ -76,12 +76,12 @@ export default function Browse() {
                   exit={{ opacity: 0, scale: 0.9 }}
                 >
                   <GlassCard className="px-3 py-1.5 flex items-center gap-2">
-                    <span className="text-sm text-white">
+                    <span className="text-sm text-[#151515]">
                       {CATEGORIES.find((c) => c.slug === category)?.name}
                     </span>
                     <button
                       onClick={() => setCategory('all')}
-                      className="hover:text-mint transition-colors"
+                      className="hover:text-[#F54E00] transition-colors"
                     >
                       <X size={16} />
                     </button>
@@ -96,10 +96,10 @@ export default function Browse() {
                   exit={{ opacity: 0, scale: 0.9 }}
                 >
                   <GlassCard className="px-3 py-1.5 flex items-center gap-2">
-                    <span className="text-sm text-white capitalize">{type}</span>
+                    <span className="text-sm text-[#151515] capitalize">{type}</span>
                     <button
                       onClick={() => setType('all')}
-                      className="hover:text-mint transition-colors"
+                      className="hover:text-[#F54E00] transition-colors"
                     >
                       <X size={16} />
                     </button>
@@ -109,7 +109,7 @@ export default function Browse() {
 
               <button
                 onClick={handleClearFilters}
-                className="text-sm text-white/60 hover:text-white transition-colors"
+                className="text-sm text-[#6B6E66] hover:text-[#151515] transition-colors"
               >
                 Clear all
               </button>
@@ -126,15 +126,15 @@ export default function Browse() {
             <div className="sticky top-24 space-y-6">
               {/* Category Filter */}
               <GlassCard className="p-4">
-                <h3 className="font-semibold text-white mb-4">Categories</h3>
+                <h3 className="font-semibold text-[#151515] mb-4">Categories</h3>
                 <div className="space-y-2">
                   <button
                     onClick={() => setCategory('all')}
                     className={cn(
                       'w-full text-left px-3 py-2 rounded transition-colors duration-200',
                       category === 'all'
-                        ? 'bg-mint/20 text-mint'
-                        : 'text-white/60 hover:text-white'
+                        ? 'bg-[#FEE8DE] text-[#F54E00]'
+                        : 'text-[#6B6E66] hover:text-[#151515]'
                     )}
                   >
                     <div className="flex items-center justify-between">
@@ -149,13 +149,13 @@ export default function Browse() {
                       className={cn(
                         'w-full text-left px-3 py-2 rounded transition-colors duration-200',
                         category === cat.slug
-                          ? 'bg-mint/20 text-mint'
-                          : 'text-white/60 hover:text-white'
+                          ? 'bg-[#FEE8DE] text-[#F54E00]'
+                          : 'text-[#6B6E66] hover:text-[#151515]'
                       )}
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-sm">{cat.name}</span>
-                        <span className="text-xs text-white/40">{cat.count}</span>
+                        <span className="text-xs text-[#6B6E66]">{cat.count}</span>
                       </div>
                     </button>
                   ))}
@@ -164,7 +164,7 @@ export default function Browse() {
 
               {/* Type Filter */}
               <GlassCard className="p-4">
-                <h3 className="font-semibold text-white mb-4">Type</h3>
+                <h3 className="font-semibold text-[#151515] mb-4">Type</h3>
                 <div className="space-y-2">
                   {['all', 'agent', 'skill'].map((t) => (
                     <button
@@ -173,8 +173,8 @@ export default function Browse() {
                       className={cn(
                         'w-full text-left px-3 py-2 rounded text-sm transition-colors duration-200',
                         type === t
-                          ? 'bg-mint/20 text-mint'
-                          : 'text-white/60 hover:text-white'
+                          ? 'bg-[#FEE8DE] text-[#F54E00]'
+                          : 'text-[#6B6E66] hover:text-[#151515]'
                       )}
                     >
                       {t === 'all' ? 'All' : t.charAt(0).toUpperCase() + t.slice(1)}
@@ -202,10 +202,10 @@ export default function Browse() {
 
             {filteredItems.length === 0 ? (
               <GlassCard className="p-12 text-center">
-                <p className="text-white/60 text-lg mb-4">No items found</p>
+                <p className="text-[#6B6E66] text-lg mb-4">No items found</p>
                 <button
                   onClick={handleClearFilters}
-                  className="text-mint hover:text-mint/80 transition-colors"
+                  className="text-[#F54E00] hover:text-[#F54E00]/80 transition-colors"
                 >
                   Clear filters
                 </button>
@@ -236,7 +236,7 @@ export default function Browse() {
             <div className="sticky top-24 space-y-6">
               {/* Trending Tags */}
               <GlassCard className="p-4">
-                <h3 className="font-semibold text-white mb-4">Trending Tags</h3>
+                <h3 className="font-semibold text-[#151515] mb-4">Trending Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {TRENDING_TAGS.map((tag) => (
                     <TagPill key={tag} label={tag} color="blue" />
@@ -246,20 +246,20 @@ export default function Browse() {
 
               {/* Top Contributors */}
               <GlassCard className="p-4">
-                <h3 className="font-semibold text-white mb-4">Top Contributors</h3>
+                <h3 className="font-semibold text-[#151515] mb-4">Top Contributors</h3>
                 <div className="space-y-3">
                   {topContributors.map((author) => (
                     <div key={author.username} className="flex items-center gap-3">
                       <div
-                        className="w-8 h-8 rounded-full bg-mint/20 flex items-center justify-center flex-shrink-0"
+                        className="w-8 h-8 rounded-full bg-[#FEE8DE] flex items-center justify-center flex-shrink-0"
                         style={{ backgroundColor: `hsl(${author.karma % 360}, 70%, 50%)` }}
                       >
-                        <span className="text-xs font-bold text-white">
+                        <span className="text-xs font-bold text-[#151515]">
                           {author.displayName[0].toUpperCase()}
                         </span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-white truncate">
+                        <p className="text-sm font-medium text-[#151515] truncate">
                           {author.displayName}
                         </p>
                       </div>
@@ -272,7 +272,7 @@ export default function Browse() {
               {/* Editor's Picks */}
               {editorsPicks.length > 0 && (
                 <GlassCard className="p-4">
-                  <h3 className="font-semibold text-white mb-4">Editor's Picks</h3>
+                  <h3 className="font-semibold text-[#151515] mb-4">Editor's Picks</h3>
                   <div className="space-y-3">
                     {editorsPicks.map((item) => (
                       <ItemCard key={item.id} item={item} />
